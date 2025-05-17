@@ -1,0 +1,20 @@
+.iconLogo {
+  width: 104px;
+  height: 16px;
+}
+
+.appBar {
+  height: 68px;
+  background: var(--badges);
+}
+
+.container {
+  max-width: 1200px;
+  min-width: 320px;
+  margin: 0 auto;
+  padding: 24px 10px;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
