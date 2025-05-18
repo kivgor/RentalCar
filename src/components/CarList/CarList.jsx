@@ -12,9 +12,6 @@ const CarList = () => {
   const isloading = useSelector(selectIsLoading);
   const isError = useSelector(selectIsError);
   const { cars } = useSelector(selectCars);
-  console.log(isloading);
-  console.log(isError);
-  console.log(cars);
 
   return (
     <>

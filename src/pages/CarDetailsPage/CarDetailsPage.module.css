@@ -1,0 +1,49 @@
+.carDetailsPage {
+  height: 100%;
+  display: flex;
+  align-items: start;
+  justify-content: center;
+  gap: 72px;
+  margin-top: 56px;
+}
+
+.img {
+  border-radius: 19px;
+  object-fit: cover;
+}
+
+.textThumb {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+}
+
+.carText {
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 1.33333;
+  text-align: center;
+  color: (--main);
+  margin-bottom: 8px;
+}
+
+.carTextAccent {
+  font-family: 'Manrope', sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.25;
+  color: var(--gray);
+}
+.addressThumb {
+  display: flex;
+  gap: 6px;
+}
+
+.addressMargin {
+  margin-bottom: 4px;
+}
+.icon {
+  width: 16px;
+  height: 16px;
+}
