@@ -1,6 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchData } from './operations';
-// import { selectNameFilter } from './filtersSlice';
+import { fetchData } from './operations.js';
 
 const initialState = {
   cars: {
@@ -16,7 +15,7 @@ const slice = createSlice({
   extraReducers: builder => {
     builder
       .addCase(fetchData.fulfilled, (state, action) => {
-        state.contacts.items = action.payload;
+        state.cars.items = action.payload;
         state.isLoading = false;
       })
       .addCase(fetchData.pending, state => {
@@ -33,16 +32,3 @@ export const carReducer = slice.reducer;
 export const selectCars = state => state.cars.cars.items;
 export const selectIsLoading = state => state.cars.isLoading;
 export const selectIsError = state => state.cars.isError;
-
-// export const selectFilteredContacts = createSelector(
-//   [selectContacts, selectNameFilter],
-//   (phonebook, statusFilter) => {
-//     const newPhonebook = phonebook.filter(contact =>
-//       contact.name
-//         .toLowerCase()
-//         .trim()
-//         .includes(statusFilter.toLowerCase().trim())
-//     );
-//     return newPhonebook;
-//   }
-// );

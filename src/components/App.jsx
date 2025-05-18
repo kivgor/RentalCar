@@ -3,27 +3,24 @@ import MainLayout from './MainLayout/MainLayout.jsx';
 import HomePage from '../pages/HomePage/HomePage.jsx';
 import CatalogPage from '../pages/CatalogPage/CatalogPage.jsx';
 import NotFound from '../pages/NotFound/NotFound.jsx';
-import { useEffect, useState } from 'react';
-import axios from 'axios';
+import CarDetailsPage from '../pages/CarDetailsPage/CarDetailsPage.jsx';
+import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import { fetchData } from '../redux/cars/operations.js';
 
 function App() {
-  const [cars, setCars] = useState([]);
+  const dispatch = useDispatch();
   useEffect(() => {
-    async function fetchCars() {
-      const response = await axios.get(
-        'https://car-rental-api.goit.global/cars'
-      );
-      setCars(response.data.cars);
-    }
-    fetchCars();
-  }, []);
+    dispatch(fetchData());
+  }, [dispatch]);
 
   return (
     <>
       <Routes>
         <Route path="/" element={<MainLayout />}>
           <Route index element={<HomePage />} />
-          <Route path="catalog" element={<CatalogPage cars={cars} />} />
+          <Route path="/catalog" element={<CatalogPage />} />
+          <Route path="/catalog/:id" element={<CarDetailsPage />} />
         </Route>
 
         <Route path="*" element={<NotFound />} />

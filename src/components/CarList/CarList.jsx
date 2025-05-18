@@ -1,12 +1,25 @@
 import { NavLink } from 'react-router-dom';
 import CarCard from '../CarCard/CarCard';
 import css from './CarList.module.css';
+import { useSelector } from 'react-redux';
+import {
+  selectCars,
+  selectIsError,
+  selectIsLoading,
+} from '../../redux/cars/slice';
 
-const CarList = ({ cars }) => {
+const CarList = () => {
+  const isloading = useSelector(selectIsLoading);
+  const isError = useSelector(selectIsError);
+  const { cars } = useSelector(selectCars);
+  console.log(isloading);
+  console.log(isError);
   console.log(cars);
 
   return (
     <>
+      {isError && <h2>Something went wrong!</h2>}
+      {isloading && <h2>Loading...</h2>}
       {cars.length > 0 && (
         <ul className={css.carList}>
           {cars.map(car => (

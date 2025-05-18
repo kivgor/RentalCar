@@ -49,7 +49,7 @@ const CarCard = ({
             </p>
           </li>
         </ul>
-        <NavLink to="catalog" className={css.button}>
+        <NavLink to="id" className={css.button}>
           Read more
         </NavLink>
       </div>
