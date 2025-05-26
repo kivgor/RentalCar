@@ -1,0 +1,45 @@
+.button {
+  height: 44px;
+  border-radius: 12px;
+  font-weight: 600;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.blue {
+  background-color: var(--button);
+  color: var(--white);
+}
+
+.white {
+  background-color: var(--white);
+  border: 1px solid var(--button);
+  color: var(--main);
+}
+
+.narrow {
+  width: 100%;
+  max-width: 156px;
+}
+
+.wide {
+  width: 100%;
+  max-width: 276px;
+}
+
+.marginButtom {
+  margin-bottom: 60px;
+}
+
+.blue:hover,
+.blue:focus {
+  background-color: var(--button-hover);
+}
+
+.white:hover,
+.white:focus {
+  border: 1px solid var(--button-hover);
+}

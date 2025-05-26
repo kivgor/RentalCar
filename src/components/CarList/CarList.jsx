@@ -1,17 +1,26 @@
 import { NavLink } from 'react-router-dom';
 import CarCard from '../CarCard/CarCard';
 import css from './CarList.module.css';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   selectCars,
   selectIsError,
   selectIsLoading,
 } from '../../redux/cars/slice';
+import { useEffect } from 'react';
+import { fetchData } from '../../redux/cars/operations';
+import Button from '../Button/Button';
 
 const CarList = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchData());
+  }, [dispatch]);
+
   const isloading = useSelector(selectIsLoading);
   const isError = useSelector(selectIsError);
   const { cars } = useSelector(selectCars);
+  console.log(cars);
 
   return (
     <>
@@ -25,9 +34,9 @@ const CarList = () => {
         </ul>
       )}
       <div className={css.loadMore}>
-        <NavLink to="catalog" className={css.button}>
+        <Button width="narrow" color="white" to="catalog">
           Load more
-        </NavLink>
+        </Button>
       </div>
     </>
   );

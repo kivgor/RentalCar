@@ -1,6 +1,7 @@
 import clsx from 'clsx';
 import css from './CarCard.module.css';
 import { NavLink } from 'react-router-dom';
+import Button from '../Button/Button';
 
 const CarCard = ({
   id,
@@ -49,9 +50,9 @@ const CarCard = ({
             </p>
           </li>
         </ul>
-        <NavLink to={'/catalog/' + id.toString()} className={css.button}>
+        <Button width="wide" color="blue" to={'/catalog/' + id.toString()}>
           Read more
-        </NavLink>
+        </Button>
       </div>
     </li>
   );
