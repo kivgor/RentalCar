@@ -4,3 +4,9 @@
   align-items: center;
   justify-content: center;
 }
+
+.loaderText {
+  display: flex;
+  margin-top: 56px;
+  margin-bottom: 5px;
+}

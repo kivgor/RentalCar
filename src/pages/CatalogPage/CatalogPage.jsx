@@ -1,19 +1,47 @@
 import SearchBar from '../../components/SearchBar/SearchBar';
 import CarList from '../../components/CarList/CarList';
 import css from './CatalogPage.module.css';
-import { useDispatch } from 'react-redux';
-import { useEffect } from 'react';
-import { fetchData } from '../../redux/cars/operations';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import { BarLoader, BeatLoader, ClipLoader } from 'react-spinners';
+// import { useDispatch } from 'react-redux';
+// import { useEffect } from 'react';
+// import { fetchData } from '../../redux/cars/operations';
 
 const CatalogPage = () => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
+  // useEffect(() => {
+  //   dispatch(fetchData());
+  // }, [dispatch]);
+
+  const [cars, setCars] = useState([]);
+  const [loading, setLoading] = useState(false);
+
   useEffect(() => {
-    dispatch(fetchData());
-  }, [dispatch]);
+    async function fetchCars() {
+      try {
+        setLoading(true);
+        const { data } = await axios.get(
+          'https://car-rental-api.goit.global/cars'
+        );
+        setCars(data.cars);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchCars();
+  }, []);
+
   return (
     <div className={css.catalogPage}>
       <SearchBar />
-      <CarList />
+      {loading && (
+        <p className={css.loaderText}>Loading data, please wait...</p>
+      )}
+      <BeatLoader color={'blue'} loading={loading} size={10} />
+      {cars.length > 0 && <CarList cars={cars} />}
     </div>
   );
 };

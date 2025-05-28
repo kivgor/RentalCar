@@ -1,6 +1,5 @@
 import clsx from 'clsx';
 import css from './CarCard.module.css';
-import { NavLink } from 'react-router-dom';
 import Button from '../Button/Button';
 
 const CarCard = ({

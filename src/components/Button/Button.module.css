@@ -23,11 +23,13 @@
 .narrow {
   width: 100%;
   max-width: 156px;
+  width: 156px;
 }
 
 .wide {
   width: 100%;
   max-width: 276px;
+  width: 276px;
 }
 
 .marginButtom {

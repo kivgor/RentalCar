@@ -2,6 +2,7 @@ import { Field, Form, Formik } from 'formik';
 import { useId } from 'react';
 import css from './SearchBar.module.css';
 import clsx from 'clsx';
+import Button from '../Button/Button';
 
 const initialValues = {
   chooseBrand: '',
@@ -30,6 +31,7 @@ const SearchBar = () => {
               Car brand
             </label>
             <Field
+              // as="select"
               className={css.input}
               type="text"
               placeholder="Choose a brand"
@@ -73,10 +75,12 @@ const SearchBar = () => {
               id={mileageToId}
             />
           </div>
-
           <button className={css.button} type="submit">
-            Search
+            Submit
           </button>
+          {/* <Button width="narrow" color="blue">
+            Search
+          </Button> */}
         </Form>
       </Formik>
     </div>
