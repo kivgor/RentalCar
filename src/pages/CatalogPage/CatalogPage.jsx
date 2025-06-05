@@ -3,7 +3,7 @@ import CarList from '../../components/CarList/CarList';
 import css from './CatalogPage.module.css';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { BarLoader, BeatLoader, ClipLoader } from 'react-spinners';
+import { BeatLoader } from 'react-spinners';
 // import { useDispatch } from 'react-redux';
 // import { useEffect } from 'react';
 // import { fetchData } from '../../redux/cars/operations';
@@ -16,6 +16,7 @@ const CatalogPage = () => {
 
   const [cars, setCars] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     async function fetchCars() {
@@ -26,6 +27,7 @@ const CatalogPage = () => {
         );
         setCars(data.cars);
       } catch (error) {
+        setError(true);
         console.log(error);
       } finally {
         setLoading(false);
@@ -38,9 +40,14 @@ const CatalogPage = () => {
     <div className={css.catalogPage}>
       <SearchBar />
       {loading && (
-        <p className={css.loaderText}>Loading data, please wait...</p>
+        <p className={css.messageText}>Loading data, please wait...</p>
       )}
       <BeatLoader color={'blue'} loading={loading} size={10} />
+      {error && (
+        <p className={css.messageText}>
+          Whoops, something went wrong! Please try to reload this page!
+        </p>
+      )}
       {cars.length > 0 && <CarList cars={cars} />}
     </div>
   );

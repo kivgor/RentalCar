@@ -45,7 +45,7 @@ const CarCard = ({
           </li>
           <li>
             <p className={clsx(css.address, css.cleanBorder)}>
-              {mileage.toString()[0]} {mileage.toString().substring(1)}km
+              {mileage.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')} km
             </p>
           </li>
         </ul>

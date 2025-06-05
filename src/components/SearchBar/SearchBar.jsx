@@ -1,8 +1,9 @@
 import { Field, Form, Formik } from 'formik';
-import { useId } from 'react';
+import { useEffect, useId, useState } from 'react';
 import css from './SearchBar.module.css';
 import clsx from 'clsx';
-import Button from '../Button/Button';
+import toast from 'react-hot-toast';
+import axios from 'axios';
 
 const initialValues = {
   chooseBrand: '',
@@ -17,9 +18,42 @@ const SearchBar = () => {
   const mileageFromId = useId();
   const mileageToId = useId();
 
-  const handleSubmit = (values, actions) => {
-    // console.log(values);
-    actions.resetForm();
+  const [brands, setBrands] = useState([]);
+  // const [loading, setLoading] = useState(false);
+  // const [error, setError] = useState(false);
+
+  useEffect(() => {
+    async function fetchBrands() {
+      try {
+        // setLoading(true);
+        const { data } = await axios.get(
+          'https://car-rental-api.goit.global/brands'
+        );
+        // console.log(data);
+        setBrands(data);
+      } catch (error) {
+        // setError(true);
+        console.log(error);
+      } finally {
+        // setLoading(false);
+      }
+    }
+    fetchBrands();
+  }, []);
+
+  const handleSubmit = values => {
+    // const handleSubmit = (values, actions) => {
+    console.log(values);
+    if (
+      values.chooseBrand.trim() === '' &&
+      values.choosePrice.trim() === '' &&
+      values.mileageFrom.trim() === '' &&
+      values.mileageTo.trim() === ''
+    ) {
+      toast.success('Please enter search term!');
+      return;
+    }
+    // actions.resetForm();
   };
 
   return (
@@ -30,14 +64,26 @@ const SearchBar = () => {
             <label htmlFor={chooseBrandId} className={css.label}>
               Car brand
             </label>
+            {/* <div className={css.fieldThumb}> */}
             <Field
-              // as="select"
+              as="select"
               className={css.input}
-              type="text"
               placeholder="Choose a brand"
               name="chooseBrand"
               id={chooseBrandId}
-            />
+            >
+              <option value="">--</option>
+              {brands.map(brand => (
+                <option key={brand} value={brand}>
+                  {brand}
+                </option>
+              ))}
+            </Field>
+
+            {/* <svg className={css.chevronDown}>
+                <use href={'/icons.svg#icon-chevron-down'}></use>
+              </svg>
+            </div> */}
           </div>
 
           <div className={css.fieldThumb}>

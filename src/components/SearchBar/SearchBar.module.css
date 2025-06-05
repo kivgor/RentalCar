@@ -35,7 +35,26 @@
   height: 44px;
   background-color: var(--inputs);
   width: 200px;
+  /* appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none; */
+  /* position: relative;
+  z-index: 2; */
 }
+
+/* .fieldThumb {
+  display: flex;
+  position: relative;
+  justify-content: center;
+}
+
+.chevronDown {
+  width: 16px;
+  height: 16px;
+  position: absolute;
+  right: 10px;
+  z-index: 1;
+} */
 
 .input:focus {
   outline: 0;
@@ -75,4 +94,10 @@
 .button:hover,
 .button:focus {
   background-color: var(--button-hover);
+}
+
+.messageText {
+  display: flex;
+  margin-top: 56px;
+  margin-bottom: 5px;
 }
