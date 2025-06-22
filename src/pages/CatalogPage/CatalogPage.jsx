@@ -2,39 +2,50 @@ import SearchBar from '../../components/SearchBar/SearchBar';
 import CarList from '../../components/CarList/CarList';
 import css from './CatalogPage.module.css';
 import { useEffect, useState } from 'react';
-import axios from 'axios';
 import { BeatLoader } from 'react-spinners';
-// import { useDispatch } from 'react-redux';
-// import { useEffect } from 'react';
-// import { fetchData } from '../../redux/cars/operations';
+import toast from 'react-hot-toast';
+import { fetchCarsByQuery } from '../../services/api';
 
 const CatalogPage = () => {
-  // const dispatch = useDispatch();
-  // useEffect(() => {
-  //   dispatch(fetchData());
-  // }, [dispatch]);
-
-  const [cars, setCars] = useState([]);
+  const [carList, setCarList] = useState([]);
+  const [query] = useState('');
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
 
   useEffect(() => {
-    async function fetchCars() {
+    const getCarsData = async () => {
       try {
         setLoading(true);
-        const { data } = await axios.get(
-          'https://car-rental-api.goit.global/cars'
-        );
-        setCars(data.cars);
+        setError(false);
+        const { cars, totalPages } = await fetchCarsByQuery(page, query);
+
+        if (page > 1) {
+          setCarList(prevState => [...prevState, ...cars]);
+        } else {
+          setCarList(cars);
+        }
+
+        setTotalPages(totalPages);
+        if (totalPages === 0) {
+          toast.error('No cars by query: ' + query);
+          return;
+        }
       } catch (error) {
-        setError(true);
         console.log(error);
+        setError(true);
       } finally {
         setLoading(false);
       }
-    }
-    fetchCars();
-  }, []);
+    };
+    getCarsData();
+  }, [page, query]);
+  // console.log(carList);
+
+  const handleLoadMore = () => {
+    setPage(prev => prev + 1);
+  };
 
   return (
     <div className={css.catalogPage}>
@@ -48,7 +59,16 @@ const CatalogPage = () => {
           Whoops, something went wrong! Please try to reload this page!
         </p>
       )}
-      {cars.length > 0 && <CarList cars={cars} />}
+
+      {carList.length > 0 && <CarList carList={carList} />}
+      {carList.length > 0 && page < totalPages && (
+        <button className={css.button} onClick={handleLoadMore}>
+          Load more
+        </button>
+      )}
+      {/* <Button width="narrow" color="white">
+          Load more
+        </Button> */}
     </div>
   );
 };

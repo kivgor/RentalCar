@@ -19,30 +19,23 @@ const SearchBar = () => {
   const mileageToId = useId();
 
   const [brands, setBrands] = useState([]);
-  // const [loading, setLoading] = useState(false);
-  // const [error, setError] = useState(false);
 
   useEffect(() => {
     async function fetchBrands() {
       try {
-        // setLoading(true);
         const { data } = await axios.get(
           'https://car-rental-api.goit.global/brands'
         );
-        // console.log(data);
+
         setBrands(data);
       } catch (error) {
-        // setError(true);
         console.log(error);
-      } finally {
-        // setLoading(false);
       }
     }
     fetchBrands();
   }, []);
 
   const handleSubmit = values => {
-    // const handleSubmit = (values, actions) => {
     console.log(values);
     if (
       values.chooseBrand.trim() === '' &&
@@ -53,7 +46,6 @@ const SearchBar = () => {
       toast.success('Please enter search term!');
       return;
     }
-    // actions.resetForm();
   };
 
   return (

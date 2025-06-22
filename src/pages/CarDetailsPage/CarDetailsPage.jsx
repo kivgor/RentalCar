@@ -8,12 +8,15 @@ import { registerSchema } from '../../schemas/schemas';
 import css from './CarDetailsPage.module.css';
 import clsx from 'clsx';
 import toast from 'react-hot-toast';
+import DatePicker from 'react-datepicker';
+// import { addDays } from 'date-fns';
 
 const CarDetailsPage = () => {
   const { id } = useParams();
   const [carDetails, setCarDetails] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
+  // const [selectedDate, setSelectedDate] = useState(null);
 
   const cutDate = new Date().toISOString().slice(0, 10);
 
@@ -79,7 +82,11 @@ const CarDetailsPage = () => {
                 Stay connected! We are always ready to help you.
               </p>
 
-              <form className={css.form} onSubmit={handleSubmit(onSubmit)}>
+              <form
+                className={css.form}
+                onSubmit={handleSubmit(onSubmit)}
+                // id="external-form"
+              >
                 <ul className={css.formList}>
                   <li className={css.inputThumb}>
                     <input
@@ -110,6 +117,24 @@ const CarDetailsPage = () => {
 
                 <ul className={css.formList}>
                   <li className={css.inputThumb}>
+                    {/* <DatePicker
+                      {...register('bookingDate')}
+                      selected={selectedDate}
+                      onChange={date => setSelectedDate(date)}
+                      dateFormat="dd/MM/yyyy h:mm aa"
+                      timeFormat="HH:mm"
+                      timeIntervals={15}
+                      placeholderText="Booking date"
+                      showPopperArrow={false}
+                      openToDate={new Date()}
+                      minDate={new Date()}
+                      maxDate={addDays(new Date(), 365)}
+                      className={css.customDatePicker}                      
+                      // showTimeSelect
+                      // required
+                      // form="external-form"
+                      // showYearDropdown
+                    /> */}
                     <input
                       type="date"
                       {...register('bookingDate')}

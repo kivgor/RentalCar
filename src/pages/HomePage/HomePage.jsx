@@ -5,7 +5,7 @@ const HomePage = () => {
   return (
     <div className={css.homePage}>
       <p className={css.title}>Find your perfect rental car</p>
-      <Button width="wide" color="blue" to="catalog" marginButtom>
+      <Button width="wide" color="blue" to="/catalog" marginButtom>
         View Catalog
       </Button>
     </div>

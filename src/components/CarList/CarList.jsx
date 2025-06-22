@@ -1,23 +1,15 @@
 import CarCard from '../CarCard/CarCard';
 import css from './CarList.module.css';
-import Button from '../Button/Button';
 
-const CarList = ({ cars }) => {
+const CarList = ({ carList }) => {
   return (
-    <>
-      {cars.length > 0 && (
-        <ul className={css.carList}>
-          {cars.map(car => (
-            <CarCard {...car} key={car.id} />
-          ))}
-        </ul>
-      )}
-      <div className={css.loadMore}>
-        <Button width="narrow" color="white" to="catalog">
-          Load more
-        </Button>
-      </div>
-    </>
+    <ul className={css.carList}>
+      {carList.map(car => (
+        <li key={car.id} className={css.item}>
+          <CarCard {...car} key={car.id} />
+        </li>
+      ))}
+    </ul>
   );
 };
 
