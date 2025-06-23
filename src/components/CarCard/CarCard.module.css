@@ -1,4 +1,8 @@
 .carCard {
+  height: 424px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .imgCard {
@@ -44,8 +48,4 @@
 
 .addressMargin {
   margin-bottom: 4px;
-}
-
-.addressButtomMargin {
-  margin-bottom: 32px;
 }

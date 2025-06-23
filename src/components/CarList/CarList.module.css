@@ -2,9 +2,9 @@
   max-width: 1200px;
   min-width: 320px;
   margin-top: 56px;
+  margin-bottom: 80px;
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
   align-items: center;
   gap: 48px 32px;
 }
